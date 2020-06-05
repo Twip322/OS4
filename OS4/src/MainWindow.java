@@ -32,6 +32,7 @@ public class MainWindow{
 	private JButton btnDelete;
 	MyJPanel panel;
 	WorkPM PMemory;
+	BlocksForFile blf;
 	private fileManager fileManager;
 	private JTextField textFieldSizeFile;
 	private JLabel lblSizeFile;
@@ -136,14 +137,17 @@ public class MainWindow{
 		btnCreateFile.setBounds(184, 42, 165, 23);
 		frame.getContentPane().add(btnCreateFile);
 		
+		
 		btnMove = new JButton("Move");
 		btnMove.setEnabled(false);
 		btnMove.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 					fileManager.setForMove(null);
 					startUpdateTree(fileManager.getRootFile().getChilds());
 				}
 			});
+		
 		btnMove.setBounds(179, 179, 170, 23);
 		frame.getContentPane().add(btnMove);
 		
@@ -151,13 +155,30 @@ public class MainWindow{
 		btnDelete.setEnabled(false);
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 					fileManager.delete();
 					startUpdateTree(fileManager.getRootFile().getChilds());
 					panel.repaint();
+					
 			}
 		});
 		btnDelete.setBounds(189, 213, 160, 23);
 		frame.getContentPane().add(btnDelete);
+		
+		JButton btnSearchForBlocks = new JButton("Blocks");
+		btnSearchForBlocks.setEnabled(false);
+		btnSearchForBlocks.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BlocksForFile bff=new BlocksForFile(PMemory);
+				int[] bl=bff.getBlocks();
+				for(int i=0;i<bl.length;i++)
+				{
+					System.out.println(bl[i]);
+				}
+			}
+		});
+		btnSearchForBlocks.setBounds(187, 402, 162, 23);
+		frame.getContentPane().add(btnSearchForBlocks);
 		
 		textFieldSizeDisc = new JTextField();
 		textFieldSizeDisc.setText("1024");
@@ -194,6 +215,7 @@ public class MainWindow{
 				buttonCreateFolder.setEnabled(true);
 				buttonPaste.setEnabled(true);
 				txtName.setEnabled(true);
+				btnSearchForBlocks.setEnabled(true);
 				PMemory = new WorkPM(Integer.parseInt(textFieldSizeDisc.getText()),Integer.parseInt(textSizeSector.getText()));
 				PMemory.setStartSelectedFile(0);
 				panel = new MyJPanel(PMemory);
@@ -216,6 +238,8 @@ public class MainWindow{
 		lblSizeFile = new JLabel("Size File:");
 		lblSizeFile.setBounds(199, 366, 54, 31);
 		frame.getContentPane().add(lblSizeFile);
+		
+	
 	}
 
 	
@@ -238,13 +262,15 @@ public class MainWindow{
 				System.out.println(fileManager.getSelected());
 			}
 		});
+		
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(tree);
 		tree.updateUI();
 		tree.setScrollsOnExpand(true);
 	}
-
+	
 	private void updateTree(DefaultMutableTreeNode treeFile, ArrayList<File> childs) {
+		
 		for (File file : childs) {
 			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(file);
 			treeFile.add(newNode);
