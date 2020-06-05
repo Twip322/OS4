@@ -165,21 +165,6 @@ public class MainWindow{
 		btnDelete.setBounds(189, 213, 160, 23);
 		frame.getContentPane().add(btnDelete);
 		
-		JButton btnSearchForBlocks = new JButton("Blocks");
-		btnSearchForBlocks.setEnabled(false);
-		btnSearchForBlocks.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				BlocksForFile bff=new BlocksForFile(PMemory);
-				int[] bl=bff.getBlocks();
-				for(int i=0;i<bl.length;i++)
-				{
-					System.out.println(bl[i]);
-				}
-			}
-		});
-		btnSearchForBlocks.setBounds(187, 402, 162, 23);
-		frame.getContentPane().add(btnSearchForBlocks);
-		
 		textFieldSizeDisc = new JTextField();
 		textFieldSizeDisc.setText("1024");
 		textFieldSizeDisc.setBounds(263, 278, 86, 20);
@@ -215,7 +200,6 @@ public class MainWindow{
 				buttonCreateFolder.setEnabled(true);
 				buttonPaste.setEnabled(true);
 				txtName.setEnabled(true);
-				btnSearchForBlocks.setEnabled(true);
 				PMemory = new WorkPM(Integer.parseInt(textFieldSizeDisc.getText()),Integer.parseInt(textSizeSector.getText()));
 				PMemory.setStartSelectedFile(0);
 				panel = new MyJPanel(PMemory);

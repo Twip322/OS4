@@ -8,6 +8,7 @@ public class fileManager {
 	private File selected = rootFile;
 	private File forCopy;
 	private File forMove;
+	BlocksForFile bff;
 	private DefaultMutableTreeNode treeFile = new DefaultMutableTreeNode(rootFile);
 	private DefaultMutableTreeNode selectedNodeTree = treeFile;
 	private WorkPM wPMemory;
@@ -17,11 +18,17 @@ public class fileManager {
 		rootFile.setSize(1);
 		wPMemory.allocateMemoryForFile(rootFile);
 	}
-
+	
+	public int[] getBlocks()
+	{
+		return bff.getBlocks();
+	}
+	
+	
 	public File getRootFile() {
 		return rootFile;
 	}
-
+	
 	public void setRootFile(File rootFile) {
 		this.rootFile = rootFile;
 	}
