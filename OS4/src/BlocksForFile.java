@@ -2,13 +2,10 @@
 public class BlocksForFile {
 	WorkPM PMemory;
 	
-	public BlocksForFile(WorkPM PMemory)
+	public int[] getBlocks(File file)
 	{
-		this.PMemory=PMemory;
-	}
-	public int[] getBlocks()
-	{
-		int startBlock=PMemory.getStartSelectedFile();
+		
+		int startBlock=file.getStartInMem();
 		int[] ans=new int[PMemory.getTables().size()];
 		for(int i=0;i<ans.length;i++)
 		{

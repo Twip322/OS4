@@ -19,9 +19,9 @@ public class fileManager {
 		wPMemory.allocateMemoryForFile(rootFile);
 	}
 	
-	public int[] getBlocks()
+	public int[] getBlocks(File file)
 	{
-		return bff.getBlocks();
+		return bff.getBlocks(file);
 	}
 	
 	
